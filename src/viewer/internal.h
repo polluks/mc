@@ -414,11 +414,11 @@ static inline gboolean
 mcview_get_byte_indexed (WView * view, off_t base, off_t ofs, int *retval)
 {
     if (base <= OFFSETTYPE_MAX - ofs)
-    {
         return mcview_get_byte (view, base + ofs, retval);
-    }
+
     if (retval)
         *retval = -1;
+
     return FALSE;
 }
 
