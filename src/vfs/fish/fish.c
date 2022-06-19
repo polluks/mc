@@ -381,9 +381,13 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if ((fish_super->sockw != -1) || (fish_super->sockr != -1))
     {
         vfs_print_message (_("fish: Disconnecting from %s"), super->name ? super->name : "???");
-        fish_command (me, super, NONE, "#BYE\nexit\n", -1);
-        close (fish_super->sockw);
-        close (fish_super->sockr);
+        if (fish_super->sockw != -1)
+        {
+            fish_command (me, super, NONE, "#BYE\nexit\n", -1);
+            close (fish_super->sockw);
+        }
+        if (fish_super->sockr != -1)
+            close (fish_super->sockr);
         fish_super->sockw = fish_super->sockr = -1;
     }
     g_free (fish_super->scr_ls);
