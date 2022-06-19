@@ -1330,10 +1330,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
         g_free (dirname);
         if (dir == NULL)
-        {
-            g_free (name);
             return NULL;
-        }
 
         name = g_path_get_basename (q);
         ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
